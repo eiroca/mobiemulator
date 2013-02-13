@@ -67,6 +67,11 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+/**
+ *
+ * @author Ashok Kumar Gujarathi
+ */
+
 public class MobiEmulator extends JFrame {
     public static final String EMULATOR_TITLE = "MobiEmulator";
     private static BufferedImage midletIcon=null;
@@ -258,7 +263,6 @@ public class MobiEmulator extends JFrame {
         options = new Options(this);
         csManager = new CallSMSManager();
         logFrame = new LogFrame(mobiEmulatorInstance);
-        // createMemoryFrame();
         mvf = new MemoryView();
         paintStackFrame = new PaintFrameStack();
         profilerframe = new Profiler(mobiEmulatorInstance);
@@ -362,7 +366,6 @@ public class MobiEmulator extends JFrame {
                 }
             }
         });
-        // emulOptions.add(Settings);
         emulToolBar = new JToolBar();
         emulToolBar.setFloatable(false);
         emulToolBar.setFocusable(false);
@@ -384,7 +387,6 @@ public class MobiEmulator extends JFrame {
             }
         });
         infoButton.setText("i");
-        // emulToolBar.add(infoButton);
 
         createFpsPopup();
         fpsPopButton = createToolBarButton(emulToolBar, getImageIcon(Constants.fpsIcon), "FPS");
@@ -433,10 +435,7 @@ public class MobiEmulator extends JFrame {
         pack();
         canvasPanel.requestFocus();
         // load modes
-//        loadPlayerMode();
         loadDeveloperMode();
-        //
-       
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((dim.width >> 1) - (getPreferredSize().width >> 1), (dim.height >> 1) - (getPreferredSize().height >> 1));
         System.out.println("MobiEmulator Started..");
@@ -572,7 +571,6 @@ public class MobiEmulator extends JFrame {
                 int Height = Integer.parseInt(emulatorHeightInput.getText());
                 updateScreenSize(Width, Height);
                 dimensionPopup.setVisible(false);
-                // if(emulatorWidthInput.getText())
             }
         });
 
@@ -624,7 +622,6 @@ public class MobiEmulator extends JFrame {
         } catch (Exception ex) {
             Logger.getLogger(MobiEmulator.class.getName()).log(Level.SEVERE, null, ex);
         }
-        // Main.main(new String[]{"true"});
     }
 
     protected void openJar(ActionEvent e) {
@@ -659,8 +656,6 @@ public class MobiEmulator extends JFrame {
                 (int) (frameHeight) + MenuBarHeight + ToolBarHeight + StatusPanelHeight + insets.top
                         + insets.bottom));
         canvasPanel.setPreferredSize(new Dimension(frameWidth, frameHeight));
-        // javax.microedition.lcdui.Canvas c=(javax.microedition.lcdui.Canvas)
-        // canvasPanel.getCurrentDisplayable();
         setCanvasWidth(frameWidth);
         setCanvasHeight(frameHeight);
         canvasPanel.setCanvasWidth(frameWidth);
@@ -690,7 +685,6 @@ public class MobiEmulator extends JFrame {
     }
 
     public void keyRepeated(KeyEvent ke) {
-//      System.out.println("in key repeating");
         if (canvasPanel.getCurrentDisplayable() == null) {
             return;
         }
@@ -700,7 +694,6 @@ public class MobiEmulator extends JFrame {
     }
 
     public void keyPressed(KeyEvent ke) {
-//      System.out.println("key is pessing");
         if (canvasPanel.getCurrentDisplayable() == null) {
             return;
         }
@@ -722,36 +715,6 @@ public class MobiEmulator extends JFrame {
         isKeyReleased = true;
     }
 
-    /*
-    * public void actionPerformed(ActionEvent command) { String
-    * action=command.getActionCommand();
-    *
-    * if(action.equals("OpenJar")) { JFileChooser jf=new JFileChooser();
-    * jf.showOpenDialog(this); jf.setVisible(true);
-    * openJarfile=jf.getSelectedFile();
-    *
-    * if(openJarfile!=null) { setJarFileName(openJarfile.getName());
-    * setJarFilePath(openJarfile.getAbsolutePath()); loadJarFile(openJarfile);
-    * } } if(action.equals("Exit")) { System.exit(1); }
-    * if(action.equals("Log")) { mobiEmulatorInstance.showlog=!mobiEmulatorInstance.showlog;
-    * mobiEmulatorInstance.LogFrame.setVisible(mobiEmulatorInstance.showlog);
-    * canvasPanel.requestFocus(); } if(action.equals("Info")) {
-    * mobiEmulatorInstance.canvasPanel
-    * .isInfoVisible=!mobiEmulatorInstance.canvasPanel.isInfoVisible;
-    * mobiEmulatorInstance.canvasPanel
-    * .infoFrame.setVisible(mobiEmulatorInstance.canvasPanel.isInfoVisible);
-    * canvasPanel.requestFocus(); } if(action.equals("Suspend")) {
-    * mobiEmulatorInstance.canvasPanel.midp_canvas.invokeHideNotify();
-    * canvasPanel.requestFocus();
-    * //mobiEmulatorInstance.canvasPanel.setCanvasPaused(true); }
-    * if(action.equals("Resume")) {
-    * mobiEmulatorInstance.canvasPanel.midp_canvas.invokeShowNotify();
-    *
-    * canvasPanel.requestFocus();
-    * //mobiEmulatorInstance.canvasPanel.setCanvasPaused(false);
-    * System.out.println(" game is pause"
-    * +mobiEmulatorInstance.canvasPanel.isCanvasPaintPaused); } }
-    */
     public static void setSystemProperties() {
         System.setProperty("microedition.configuration", "CDLC1.1");
         System.setProperty("microedition.profiles", "MIDP2.0");
@@ -784,10 +747,6 @@ public class MobiEmulator extends JFrame {
 
     public void setJarFileName(String name) {
         openjarfilename = name;
-        /*
-         * String j="com.opera.hello.Pack"; j=j.substring(0,j.lastIndexOf("."));
-         * System.out.println("ddfs"+j);
-         */
     }
 
     public String getJarFileName() {
@@ -799,35 +758,7 @@ public class MobiEmulator extends JFrame {
     }
 
     public void unLoadCurrentJar() {
-        System.out.println("UNLOADING " + getJarFileName());
         try {
-            // Component comp[] = getContentPane().getComponents();
-            // int len = comp.length;
-            // int canvasCompIndex = -1;
-            // for (int i = 0; i < len; i++) {
-            // if (comp[i] instanceof MainCanvasPanel) {
-            // canvasCompIndex = i;
-            // }
-            // }
-//          if(getCurrentMIDlet()!=null)
-//              getCurrentMIDlet().amsDestroyApp(true);
-            // canvasPanel.getCurrentDisplayable()
-//           if(mainclass!=null)
-//           {
-//             System.out.println("mainclass is "+mainclass);
-//           Class cl=Class.forName(mainclass,false,multiClassLoader);
-//           Field flds[]= cl.getDeclaredFields();
-//           for(int i=0;i<flds.length;i++)
-//           {
-//             System.out.println("flds[i].getClass() is "+flds[i].getType());
-//             Field f=flds[i].getType().getDeclaredField(flds[i].getName());
-//             f.setAccessible(true);
-//             f.set(f.get(flds[i].getName()), null);
-//             
-//           }
-//          
-//           cl=null;
-//           }
             Thread.currentThread().setContextClassLoader(null);
             // Display.getDisplay(getCurrentMIDlet()).setCurrent(null);
             canvasPanel.midp_screen = null;
@@ -865,13 +796,6 @@ public class MobiEmulator extends JFrame {
             canvasPanel.midp_screen_backscreen = null;
             invalidate();
             validate();
-            // canvasPanel = new MainCanvasPanel(mobiEmulatorInstance, getCanvasWidth(),
-            // getCanvasHeight());
-            // canvasPanel.invalidate();
-            // canvasPanel.repaint();
-            // getContentPane().add(canvasPanel, canvasCompIndex);
-            // getContentPane().validate();
-            // getContentPane().repaint();
             isCurrentJarUnloaded = true;
             loadDefaultIcon();
         } catch (Exception e) {
@@ -901,12 +825,10 @@ public class MobiEmulator extends JFrame {
             logFrame.setLogFile(((Main.uniqueID == 0) ? ""
                     : "Emulator_" + Main.uniqueID) + jarfilename + ".log");
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
 
             return;
         }
-        // TODO Auto-generated method stub
         MidletUtils.getInstance().setMidletListener(midletListener);
         multiClassLoader = new MultiClassLoader();
         Thread.currentThread().setContextClassLoader(multiClassLoader);
@@ -999,17 +921,14 @@ public class MobiEmulator extends JFrame {
     }
 
     private void loadMainClass(String MainClass) {
-        // TODO Auto-generated method stub
         jarClasses = getClassesList();
         try {
             System.out.println("MainClass is " + MainClass);
             Class loadedClass = multiClassLoader.loadClass(MainClass);
             midlet = (MIDlet) loadedClass.newInstance();
         } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         if (isForceRepaint) {
@@ -1050,10 +969,6 @@ public class MobiEmulator extends JFrame {
                 m.amsStartApp(midletListener);
             } else {
                 urlClassLoader.setCacheJarResources(buildClasses);
-//              Class mainClass = urlClassLoader.loadClass("GameManager");
-//              Constructor cnstr[]=mainClass.getConstructors();
-//              Class parameter[]=cnstr[0].getParameterTypes();
-//              cnstr[0].newInstance(null);
             }
             urlClassLoader.setCacheJarResources(buildClasses);
         } catch (ClassNotFoundException ex) {
@@ -1101,12 +1016,9 @@ public class MobiEmulator extends JFrame {
             } catch (Exception ex) {
                 Logger.getLogger(MobiEmulator.class.getName()).log(Level.SEVERE, null, ex);
             }
-//          System.out.println("no of fields of that class " + fields.length);
             for (Field field : fields) {
                 field.setAccessible(true);
-//              System.out.println("current field is " + fields[j].getName());
                 if ((field != null) && (field.getType() == Image.class)) {
-//                  System.out.println(">>>>>>>>>>>>>>>>>>>>>>>" + jarClasses.elementAt(i) + " " + fields[j].getName());
                     Object value = null;
                     try {
                         // Object c=Class.forName(classes.elementAt(i).toString(),false,multiClassLoader).newInstance();
@@ -1116,20 +1028,6 @@ public class MobiEmulator extends JFrame {
                     } catch (Exception ex) {
                         Logger.getLogger(MobiEmulator.class.getName()).log(Level.SEVERE, null, ex);
                     }
-//                  Vector vc=new Vector();
-//                  vc.addElement(fields[j]);
-//                  System.out.println("image data is "+vc.elementAt(0));
-//                  if(value!=null){
-//                  Image ic=(Image)value;
-//                  
-//                  ImageIcon ivv=new ImageIcon(ic._image);
-//                  JLabel jc=new JLabel(ivv);
-//                  jc.setPreferredSize(jc.getPreferredSize());
-//                  jc.setVisible(true);
-//                  
-//                  
-//                  memoryFrame.add(jc);
-//                  }
                 }
             }
         }
@@ -1160,7 +1058,7 @@ public class MobiEmulator extends JFrame {
     }
 
     private void loadMIDletIcon(Attributes manifestAttributes) {
-        String imagepath = "";    // manifestAttributes.getValue("MIDlet-Icon");
+        String imagepath = "";
         String midletattr = manifestAttributes.getValue("MIDlet-1");
         StringTokenizer st = new StringTokenizer(midletattr, ",");
         st.nextToken();
@@ -1187,13 +1085,9 @@ public class MobiEmulator extends JFrame {
 
     
     public static InputStream getResourceAsStream(String resourcename) throws IOException {
-//      System.out.println("resoucename is " + resourcename);
         if (resourcename.startsWith("/")) {
             resourcename = resourcename.substring(1);
         }
-        // setting jarcacheresources
-        // if(buildClasses!=null)
-        // cachedJarResources=buildClasses;
         if (cacheJarResources && (cachedJarResources.getResource(resourcename) != null)) {
             Profiler.getResourceStreamCallCount += 1;
             byte data[] = cachedJarResources.getResource(resourcename);
@@ -1204,19 +1098,7 @@ public class MobiEmulator extends JFrame {
             return bais;
         } else {
             if (!getJarFilePath().equals("")) {
-                // System.out.println("in getJarfilepath" +resourcename);
                 String packagePath = mobiEmulatorInstance.getClass().getName();
-                // System.out.println("packagePath is "+packagePath);
-                /*
-                 * if (packagePath.lastIndexOf(".") > 0) { packagePath =
-                 * packagePath.substring(0,
-                 * packagePath.lastIndexOf(".")).replace('.', '/') + '/'; } if
-                 * (resourcename.startsWith("/")) resourcename =
-                 * resourcename.substring(1);
-                 *
-                 *
-                 * resourcename=packagePath+resourcename;
-                 */
                 Profiler.getResourceStreamCallCount += 1;
                 try {
                     ZipEntry ze = jarfile.getEntry(resourcename);
@@ -1249,22 +1131,17 @@ public class MobiEmulator extends JFrame {
     }
 
     private String getMainClass(Properties ManifestProperties) {
-        // TODO Auto-generated method stub
-        String ClassName = manifestAttributes.getValue("MIDlet-1");    // jarfilestream.getManifest().getMainAttributes().getValue("MIDlet-1");//"NumChallenge";
-        // System.out.println("ClassName is"+ClassName+"and "+ClassName.substring(ClassName.lastIndexOf(",")+1));
+        String ClassName = manifestAttributes.getValue("MIDlet-1");  
         StringTokenizer localStringTokenizer = new StringTokenizer(ClassName, ", ");
         while (localStringTokenizer.hasMoreTokens()) {
             ClassName = localStringTokenizer.nextToken();
         }
         System.out.println("Main ClassName is " + ClassName);
         localStringTokenizer = null;
-
-        // ClassName=ClassName.substring(ClassName.lastIndexOf(",")+1);
         return ClassName;
     }
 
     private void loadManifest() {
-        // TODO Auto-generated method stub
         manifestProperties = new Properties();
         manifestAttributes = new Attributes();
         try {
@@ -1274,13 +1151,11 @@ public class MobiEmulator extends JFrame {
             manifestAttributes = (Attributes) manifest.getMainAttributes();
             manifestProperties.load(jarInputStream);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
 
     public static String getAppProperty(String key) {
-        // TODO Auto-generated method stub
         return jadProperties.getValue(key);
     }
 
@@ -1315,7 +1190,6 @@ public class MobiEmulator extends JFrame {
     }
 
     public void updateMainFrame(float zoomVal) {
-        // TODO Auto-generated method stub
         // if(canvasZoom>1)
         setWindowZoom(zoomVal);
         canvasPanel.setZoomVal(zoomVal);
@@ -1331,7 +1205,6 @@ public class MobiEmulator extends JFrame {
 
     /* Log Frame Method */
     public void updateLogFramePos() {
-        // TODO Auto-generated method stub
         logFrame.setLocation(new Point(MobiEmulator.mobiEmulatorInstance.getX() + MobiEmulator.mobiEmulatorInstance.getWidth(),
                 MobiEmulator.mobiEmulatorInstance.getY()));
     }
@@ -1613,7 +1486,6 @@ public class MobiEmulator extends JFrame {
                 canvasPanel.isInfoVisible = !mobiEmulatorInstance.canvasPanel.isInfoVisible;
                 canvasPanel.updateInfoFramePos(MobiEmulator.mobiEmulatorInstance.getX(), MobiEmulator.mobiEmulatorInstance.getY());
                 canvasPanel.infoFrame.setVisible(mobiEmulatorInstance.canvasPanel.isInfoVisible);
-                // loadClassesFromPath("E:/stuff/NumChallenge/build/preverified");
                 canvasPanel.requestFocus();
             }
             if (action.equals(Constants.methodsText)) {
@@ -1664,30 +1536,15 @@ public class MobiEmulator extends JFrame {
                         : (curValue < 0) ? 3
                         : curValue);
                 mobiEmulatorInstance.canvasPanel.canvasRotationAngleMultiplier = curValue;
-//              if (ccwCanvasRotation.getState()) {
-//                  mobiEmulatorInstance.canvasPanel.canvasRotationAngleMultiplier--;
-//              } else {
-//                  mobiEmulatorInstance.canvasPanel.canvasRotationAngleMultiplier++;
-//              }
-//              if (mobiEmulatorInstance.canvasPanel.canvasRotationAngleMultiplier > 3) {
-//                  mobiEmulatorInstance.canvasPanel.canvasRotationAngleMultiplier = 0;
-//              // System.out.println("canvasRotationAngleMultiplier is "+mobiEmulatorInstance.canvasPanel.canvasRotationAngleMultiplier);
-//              }
-//              if (mobiEmulatorInstance.canvasPanel.canvasRotationAngleMultiplier < 0) {
-//                  mobiEmulatorInstance.canvasPanel.canvasRotationAngleMultiplier = 3;
-//              }
                 rotateCanvas(mobiEmulatorInstance.canvasPanel.canvasRotationAngleMultiplier);
             }
             if (action.equals(Constants.profilerText)) {
-                //              System.out.println("comming in profiler");
                 if (TextField.isFocused) {
                     return;
                 }
                 profilerframe.setVisible(!profilerframe.isVisible());
             }
             if (action.equals(Constants.paintInvestigatorText)) {
-                //              System.out.println("comming in profiler");
-                // Graphics.paintStackEnabled=!Graphics.paintStackEnabled;
                 if (!canvasPanel.isCanvasPaused()) {
                     paintStackFrame.startRecording();
                 } else {
