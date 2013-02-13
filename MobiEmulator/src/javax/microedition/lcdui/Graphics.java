@@ -1,13 +1,6 @@
-/*
- * This program is free software. It comes without any warranty, to
- * the extent permitted by applicable law. You can redistribute it
- * and/or modify it under the terms of the Do What The Fuck You Want
- * To Public License, Version 2, as published by Sam Hocevar. See
- * http://sam.zoy.org/wtfpl/COPYING for more details.
- */
-
 
 package javax.microedition.lcdui;
+
 
 //~--- non-JDK imports --------------------------------------------------------
 
@@ -26,6 +19,11 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 //~--- JDK imports ------------------------------------------------------------
+
+/**
+ *
+ * @author Ashok Kumar Gujarathi
+ */
 
 public class Graphics {
     public static final int BASELINE = 64;
@@ -88,11 +86,6 @@ public class Graphics {
     public Graphics(java.awt.Graphics2D g, BufferedImage image) {
         graphicsImage = image;
         _graphics2D = g;
-//      if(stackImage!=null&&paintStackEnabled)
-//      {
-//      this.stackImage=stackImage;
-//      this.stackImageGraphics=this.stackImage.createGraphics();
-//      }
         this.midletListener = MidletUtils.getInstance().getMidletListener();
         translate(-getTranslateX(), -getTranslateY());
         XRayGraphics = midletListener.getXrayScreen().createGraphics();
@@ -111,7 +104,7 @@ public class Graphics {
     public java.awt.Graphics2D getGraphics() {
         // GraphicsImage=javax.microedition.lcdui.Image.createImage(Main.canvas_width,
         // Main.canvas_height);
-        return _graphics2D;    // GraphicsImage.getGraphics();
+        return _graphics2D;
     }
 
     public static void setXrayGraphics(java.awt.Graphics2D XRay_Graphics) {
@@ -140,9 +133,6 @@ public class Graphics {
 
     public void drawSubstring(String str, int offset, int len, int x, int y, int anchor) {
         drawString(str.substring(offset, offset + len), x, y, anchor);
-        // Throwable e=new Throwable();
-        // e.printStackTrace();
-        // Thread.dumpStack();
     }
 
     public void drawString(String str, int x, int y, int anchor) {
@@ -176,7 +166,6 @@ public class Graphics {
         }
         _graphics2D.drawString(str, x, y);
         if (XRayView && (XRayGraphics != null)) {
-            // System.out.println("in draw strinf ");
             XRayGraphics.setColor(new Color(DrawStringColor));
             int w = f.substringWidth(str, 0, str.length());
             XRayGraphics.fillRect(x, y - (font_Height >> 1), w, font_Height);
@@ -191,69 +180,17 @@ public class Graphics {
         MemoryImageSource mis = new MemoryImageSource(width, height, rgbData, offset, scanlength);
         java.awt.Image img = Toolkit.getDefaultToolkit().createImage(mis);
         mis = null;
-        // drawRegion(img, 0, 0, width , height, aat,0,0,0);
         _graphics2D.drawImage(img, x, y, null);
-
         midletListener.incrDrawRGBCount(width * height);
-//      BufferedImage image = new BufferedImage(width, height, processAlpha ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB);
-//      DataBufferInt localDataBufferInt = (DataBufferInt) image.getRaster().getDataBuffer();
-//      int[] dataArray = localDataBufferInt.getData();
-//
-//      int i = 0;
-//      for (int j = 0; j < height; ++j) {
-//          System.arraycopy(rgbData, offset, dataArray, i, width);
-//          if (!processAlpha) {
-//              for (int k = 0; k < width; ++k) {
-//                  dataArray[(i + k)] |= -16777216;
-//              }
-//          }
-//          i += image.getWidth();
-//          offset += scanlength;
-//      }
-//      drawRegion(image, x, y, width, height, aat, 0, 0, 0);
         aat = null;
         if (XRayView && (XRayGraphics != null)) {
             XRayGraphics.setColor(new java.awt.Color(DrawRGBColor));
             XRayGraphics.fillRect(x, y, width, height);
         }
-//      if (paintStackEnabled) {
-//                
-//                       stackImageGraphics.drawImage(img, x, y, null);
-//                    Throwable e = new Throwable();
-//                    imageStack.put("DRAWRGB",stackImage);
-//      }
+
         img = null;
     }
 
-    /*
-    * public void drawRegion(Image src,int x_src,int y_src,int width,int
-    * height,int transform,int x_dest,int y_dest,int anchor) {
-    *
-    * AffineTransform bt=_graphics2D.getTransform(); AffineTransform at=new
-    * AffineTransform(); x_dest +=getAnchorX(width,height,transform,anchor);
-    * y_dest +=getAnchorY(width,height,transform,anchor); //at.setToIdentity();
-    * at.translate(x_dest, y_dest); switch(transform) { //TRANS_NONE //MIRROR
-    * scale //ROT rotate case 1: at.translate(0.0D, height); //| at.scale(1.0,
-    * -1.0);
-    *
-    * break; case 2: at.translate(width, 0.0D); //<-> at.scale(-1.0, 1.0);
-    * break; case 3: at.translate(width, height); // ROT 180
-    * at.rotate(Math.toRadians(180)); break; // width becomes height case 4:
-    * ROT 180 at.rotate(Math.toRadians(270)); at.scale(-1.0,1.0); break; case
-    * 5: at.translate(height, 0.0D); at.rotate(Math.toRadians(90));
-    *
-    * break; case 6: at.translate(0.0D, height);
-    * at.rotate(Math.toRadians(270)); break; case 7: at.translate(height,
-    * width); at.rotate(Math.toRadians(90)); at.scale(-1.0, 1.0); break;
-    *
-    * }
-    *
-    * _graphics2D.setTransform(at); _graphics2D.drawImage(src._image, x_src,
-    * y_src, width, height, x_dest,y_dest,x_dest+width, y_dest+height, null);
-    * _graphics2D.setTransform(bt); if(XRayView) { XRayGraphics.setColor(new
-    * java.awt.Color (DrawImageColor)); XRayGraphics.fillRect(x_src, y_src,
-    * width,height); } }
-    */
     public void drawImage(Image img, int x, int y, int anchor) {
         midletListener.performancePaintImage(this, img, x, y, anchor, "drawimage", stackTrace());
         // default anchor
@@ -298,7 +235,6 @@ public class Graphics {
         midletListener.incrDrawRGBCount(width * height);
         if (XRayView && (XRayGraphics != null)) {
             XRayGraphics.setColor(xRayImageColor);
-            // System.out.println("DRAW XRAY IMAGE");
             XRayGraphics.fillRect(x, y, img._image.getWidth(null), img._image.getHeight(null));
         }
     }
@@ -614,8 +550,7 @@ public class Graphics {
     public void drawRegion(Image src, int x_src, int y_src, int width, int height, int transform, int x_dest,
                            int y_dest, int anchor)
             throws IllegalArgumentException {
-        // Graphics2D g2=(Graphics2D)_graphics;
-
+        
         midletListener.performancePaintRegion(this, src, x_src, y_src, width,
                 height, transform, x_dest, y_dest, anchor, "drawregion", stackTrace());
         AffineTransform at = getAffineTransform(width, height, transform, x_dest, y_dest, anchor);
@@ -636,7 +571,7 @@ public class Graphics {
     public void drawRegion(BufferedImage src, int x_src, int y_src, int width, int height, AffineTransform transform,
                            int x_dest, int y_dest, int anchor)
             throws IllegalArgumentException {
-        // Graphics2D g2=(Graphics2D)_graphics;
+        
         AffineTransform beforeAt = _graphics2D.getTransform();
         _graphics2D.transform(transform);
         // verifyRectInsideImage(0, 0, width, height);
