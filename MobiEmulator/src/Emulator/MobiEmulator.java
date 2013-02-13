@@ -436,9 +436,7 @@ public class MobiEmulator extends JFrame {
 //        loadPlayerMode();
         loadDeveloperMode();
         //
-        String testUrl = "D:/Digital.Chocolate.Pyramid.Bloxx.320x240.v1.0.42.S60v3.J2ME.Retail-BiNPDA.jar";
-        setJarFilePath(testUrl);
-        loadJarFile(new File(testUrl));
+       
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((dim.width >> 1) - (getPreferredSize().width >> 1), (dim.height >> 1) - (getPreferredSize().height >> 1));
         System.out.println("MobiEmulator Started..");
