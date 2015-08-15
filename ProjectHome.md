@@ -1,0 +1,1 @@
+MobiEmulator is java based J2ME Emulator for testing j2me apps and games which has good features like Method profiler,Debugger,MemoryView and has ability to capture screenshots and record video.
