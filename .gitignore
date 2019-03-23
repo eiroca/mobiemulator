@@ -58,3 +58,4 @@ local.properties
 #
 **/target/*
 mobi-emulator/logs/*
+mobi-emulator/settings.txt
